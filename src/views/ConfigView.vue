@@ -2,7 +2,7 @@
   <div class="config-view">
     <div class="left-panel">
       <div class="widget-selector">
-        <el-select v-model="selectedWidget" placeholder="Select Widget" @change="handleWidgetChange">
+        <el-select v-model="selectedWidget" placeholder="选择小组件" @change="handleWidgetChange">
           <el-option v-for="widget in widgets" :key="widget.value" :label="widget.label" :value="widget.value" />
         </el-select>
       </div>
@@ -15,7 +15,7 @@
         <el-input v-model="generatedUrl" readonly>
           <template #append>
             <el-button @click="copyUrl">
-              <el-icon><CopyDocument /></el-icon> Copy
+              <el-icon><CopyDocument /></el-icon> 复制
             </el-button>
           </template>
         </el-input>
@@ -38,42 +38,42 @@ import { CopyDocument } from '@element-plus/icons-vue';
 import { ElMessage } from 'element-plus';
 import { encodeConfig, decodeConfig } from '../utils/configUtils';
 
-// Widget components and their configs
+// 小组件组件及其配置
 import ClockWidget from '../widgets/ClockWidget.vue';
 import DateWidget from '../widgets/DateWidget.vue';
 import TextWidget from '../widgets/TextWidget.vue';
 import ImageWidget from '../widgets/ImageWidget.vue';
 
-// Config components
+// 配置组件
 import ClockConfig from '../components/config/ClockConfig.vue';
 import DateConfig from '../components/config/DateConfig.vue';
 import TextConfig from '../components/config/TextConfig.vue';
 import ImageConfig from '../components/config/ImageConfig.vue';
 
 const widgets = [
-  { label: 'Clock Widget', value: 'clock', component: ClockWidget, configComponent: ClockConfig },
-  { label: 'Date Widget', value: 'date', component: DateWidget, configComponent: DateConfig },
-  { label: 'Text Widget', value: 'text', component: TextWidget, configComponent: TextConfig },
-  { label: 'Image Widget', value: 'image', component: ImageWidget, configComponent: ImageConfig },
+  { label: '时钟小组件', value: 'clock', component: ClockWidget, configComponent: ClockConfig },
+  { label: '日期小组件', value: 'date', component: DateWidget, configComponent: DateConfig },
+  { label: '文本小组件', value: 'text', component: TextWidget, configComponent: TextConfig },
+  { label: '图片小组件', value: 'image', component: ImageWidget, configComponent: ImageConfig },
 ];
 
 const selectedWidget = ref('clock');
 const currentWidgetConfig = ref({});
 const generatedUrl = ref('');
 
-// Get widget component based on selection
+// 根据选择获取小组件组件
 const currentWidgetComponent = computed(() => {
   const widget = widgets.find(w => w.value === selectedWidget.value);
   return widget?.component;
 });
 
-// Get config component based on selection
+// 根据选择获取配置组件
 const currentConfigComponent = computed(() => {
   const widget = widgets.find(w => w.value === selectedWidget.value);
   return widget?.configComponent;
 });
 
-// Set default config for each widget type
+// 为每种小组件类型设置默认配置
 const getDefaultConfig = (widgetType: string) => {
   switch (widgetType) {
     case 'clock':
@@ -139,13 +139,13 @@ const handleWidgetChange = () => {
   updateGeneratedUrl();
 };
 
-// Update widget configuration
+// 更新小组件配置
 const updateWidgetConfig = (newConfig: any) => {
   currentWidgetConfig.value = newConfig;
   updateGeneratedUrl();
 };
 
-// Generate preview URL
+// 生成预览 URL
 const updateGeneratedUrl = () => {
   const baseUrl = window.location.origin;
   const configStr = encodeConfig({
@@ -155,16 +155,16 @@ const updateGeneratedUrl = () => {
   generatedUrl.value = `${baseUrl}/preview?data=${configStr}`;
 };
 
-// Copy URL to clipboard
+// 复制 URL 到剪贴板
 const copyUrl = () => {
   navigator.clipboard.writeText(generatedUrl.value).then(() => {
-    ElMessage.success('URL copied to clipboard!');
+    ElMessage.success('URL 已复制到剪贴板！');
   }).catch(() => {
-    ElMessage.error('Failed to copy URL');
+    ElMessage.error('复制 URL 失败');
   });
 };
 
-// Check for query params on load (for direct linking)
+// 加载时检查查询参数（用于直接链接）
 onMounted(() => {
   const queryParams = new URLSearchParams(window.location.search);
   const data = queryParams.get('data');
@@ -175,15 +175,15 @@ onMounted(() => {
       selectedWidget.value = decodedData.type;
       currentWidgetConfig.value = decodedData.config;
     } catch (e) {
-      ElMessage.error('Invalid configuration in URL');
-      handleWidgetChange(); // Load default config
+      ElMessage.error('URL 中的配置无效');
+      handleWidgetChange(); // 加载默认配置
     }
   } else {
-    handleWidgetChange(); // Load default config
+    handleWidgetChange(); // 加载默认配置
   }
 });
 
-// Update URL when configuration changes
+// 配置变更时更新 URL
 watch([selectedWidget, currentWidgetConfig], () => {
   updateGeneratedUrl();
 }, { deep: true });

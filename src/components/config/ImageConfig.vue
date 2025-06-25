@@ -1,56 +1,56 @@
 <template>
   <div class="image-config">
-    <h2>Image Widget Settings</h2>
+    <h2>图片小组件设置</h2>
     
     <el-form label-position="top">
-      <el-form-item label="Image URL">
-        <el-input v-model="localConfig.imageUrl" placeholder="Enter image URL" />
+      <el-form-item label="图片URL">
+        <el-input v-model="localConfig.imageUrl" placeholder="输入图片URL" />
       </el-form-item>
       
       <div class="preview-image" v-if="localConfig.imageUrl">
-        <img :src="localConfig.imageUrl" alt="Preview" style="max-width: 100%; max-height: 150px;" />
+        <img :src="localConfig.imageUrl" alt="预览" style="max-width: 100%; max-height: 150px;" />
       </div>
       
-      <el-divider>Size & Appearance</el-divider>
+      <el-divider>尺寸与外观</el-divider>
       
-      <el-form-item label="Width (px)">
+      <el-form-item label="宽度 (像素)">
         <el-slider v-model="localConfig.width" :min="50" :max="800" show-input />
       </el-form-item>
       
-      <el-form-item label="Height (px)">
+      <el-form-item label="高度 (像素)">
         <el-slider v-model="localConfig.height" :min="50" :max="800" show-input />
       </el-form-item>
       
-      <el-form-item label="Opacity">
+      <el-form-item label="透明度">
         <el-slider v-model="localConfig.opacity" :min="0" :max="1" :step="0.01" show-input />
       </el-form-item>
       
-      <el-form-item label="Border Radius (px)">
+      <el-form-item label="圆角半径 (像素)">
         <el-slider v-model="localConfig.borderRadius" :min="0" :max="100" show-input />
       </el-form-item>
       
-      <el-divider>Effects</el-divider>
+      <el-divider>特效</el-divider>
       
-      <el-form-item label="Shadow">
+      <el-form-item label="阴影">
         <el-switch v-model="localConfig.shadow" />
       </el-form-item>
       
       <template v-if="localConfig.shadow">
-        <el-form-item label="Shadow Color">
+        <el-form-item label="阴影颜色">
           <el-color-picker v-model="localConfig.shadowColor" show-alpha />
         </el-form-item>
         
-        <el-form-item label="Shadow Blur">
+        <el-form-item label="阴影模糊度">
           <el-slider v-model="localConfig.shadowBlur" :min="0" :max="50" show-input />
         </el-form-item>
       </template>
       
       <el-form-item>
         <el-button-group>
-          <el-button type="primary" @click="applyPreset('normal')">Normal</el-button>
-          <el-button type="success" @click="applyPreset('rounded')">Rounded</el-button>
-          <el-button type="warning" @click="applyPreset('shadow')">Shadow</el-button>
-          <el-button type="danger" @click="applyPreset('circular')">Circular</el-button>
+          <el-button type="primary" @click="applyPreset('normal')">正常</el-button>
+          <el-button type="success" @click="applyPreset('rounded')">圆角</el-button>
+          <el-button type="warning" @click="applyPreset('shadow')">阴影</el-button>
+          <el-button type="danger" @click="applyPreset('circular')">圆形</el-button>
         </el-button-group>
       </el-form-item>
     </el-form>

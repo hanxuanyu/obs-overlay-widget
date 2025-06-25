@@ -2,8 +2,8 @@
   <div class="home-view">
     <div class="container">
       <div class="header">
-        <h1>OBS Overlay Widget</h1>
-        <p>Create customizable widgets for OBS Studio streaming and recording</p>
+        <h1>OBS 悬浮小组件</h1>
+        <p>为 OBS Studio 直播和录制场景创建可定制化小组件</p>
       </div>
       
       <div class="cards">
@@ -11,9 +11,9 @@
           <div class="card-icon">
             <el-icon><Setting /></el-icon>
           </div>
-          <div class="card-title">Configure Widgets</div>
+          <div class="card-title">配置小组件</div>
           <div class="card-description">
-            Design and customize widgets for your OBS streams with an interactive interface
+            通过交互式界面设计和自定义 OBS 直播小组件
           </div>
         </div>
         
@@ -21,53 +21,53 @@
           <div class="card-icon">
             <el-icon><Document /></el-icon>
           </div>
-          <div class="card-title">Documentation</div>
+          <div class="card-title">使用文档</div>
           <div class="card-description">
-            Learn how to use and integrate OBS Overlay Widgets into your streams
+            了解如何使用和集成 OBS 悬浮小组件到您的直播中
           </div>
         </div>
       </div>
       
       <div class="features">
-        <h2>Available Widgets</h2>
+        <h2>可用小组件</h2>
         
         <div class="widget-list">
           <div class="widget-item">
             <div class="widget-icon">⏰</div>
             <div class="widget-info">
-              <h3>Clock Widget</h3>
-              <p>Display current time with customizable format, style, and effects</p>
+              <h3>时钟小组件</h3>
+              <p>显示当前时间，可自定义格式、样式和特效</p>
             </div>
           </div>
           
           <div class="widget-item">
             <div class="widget-icon">📅</div>
             <div class="widget-info">
-              <h3>Date Widget</h3>
-              <p>Show current date with customizable format, style, and effects</p>
+              <h3>日期小组件</h3>
+              <p>显示当前日期，可自定义格式、样式和特效</p>
             </div>
           </div>
           
           <div class="widget-item">
             <div class="widget-icon">📝</div>
             <div class="widget-info">
-              <h3>Text Widget</h3>
-              <p>Display text with customizable styles including gradients, shadows, and fonts</p>
+              <h3>文本小组件</h3>
+              <p>显示文本，支持渐变、阴影、字体等自定义样式</p>
             </div>
           </div>
           
           <div class="widget-item">
             <div class="widget-icon">🖼️</div>
             <div class="widget-info">
-              <h3>Image Widget</h3>
-              <p>Show images with customizable size, effects, and positioning</p>
+              <h3>图片小组件</h3>
+              <p>显示图片，可自定义大小、特效和位置</p>
             </div>
           </div>
         </div>
       </div>
       
       <div class="footer">
-        <p>OBS Overlay Widget &copy; 2025</p>
+        <p>OBS 悬浮小组件 &copy; 2025</p>
       </div>
     </div>
   </div>
@@ -84,7 +84,7 @@ const goToConfig = () => {
 };
 
 const goToDoc = () => {
-  // This would go to documentation in a real app
+  // 在实际应用中，这里会跳转到文档页面
   window.open('https://github.com/yourusername/obs-overlay-widget', '_blank');
 };
 </script>

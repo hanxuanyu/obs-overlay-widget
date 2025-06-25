@@ -1,19 +1,19 @@
 <template>
   <div class="text-config">
-    <h2>Text Widget Settings</h2>
+    <h2>文本小组件设置</h2>
     
     <el-form label-position="top">
-      <el-form-item label="Text Content">
-        <el-input v-model="localConfig.text" type="textarea" :rows="3" placeholder="Enter text to display" />
+      <el-form-item label="文本内容">
+        <el-input v-model="localConfig.text" type="textarea" :rows="3" placeholder="输入要显示的文本" />
       </el-form-item>
       
-      <el-divider>Text Style</el-divider>
+      <el-divider>文本样式</el-divider>
       
-      <el-form-item label="Font Size">
+      <el-form-item label="字体大小">
         <el-slider v-model="localConfig.fontSize" :min="12" :max="100" show-input />
       </el-form-item>
       
-      <el-form-item label="Font Family">
+      <el-form-item label="字体">
         <el-select v-model="localConfig.fontFamily">
           <el-option label="Arial" value="Arial" />
           <el-option label="Helvetica" value="Helvetica" />
@@ -25,58 +25,58 @@
         </el-select>
       </el-form-item>
       
-      <el-form-item label="Font Weight">
+      <el-form-item label="字重">
         <el-select v-model="localConfig.fontWeight">
-          <el-option label="Normal" value="normal" />
-          <el-option label="Bold" value="bold" />
-          <el-option label="Light" value="lighter" />
+          <el-option label="普通" value="normal" />
+          <el-option label="粗体" value="bold" />
+          <el-option label="细体" value="lighter" />
         </el-select>
       </el-form-item>
       
-      <el-divider>Color Settings</el-divider>
+      <el-divider>颜色设置</el-divider>
       
-      <el-form-item label="Use Gradient Colors">
+      <el-form-item label="使用渐变色">
         <el-switch v-model="localConfig.useGradient" />
       </el-form-item>
       
       <template v-if="!localConfig.useGradient">
-        <el-form-item label="Text Color">
+        <el-form-item label="文本颜色">
           <el-color-picker v-model="localConfig.color" show-alpha />
         </el-form-item>
       </template>
       
       <template v-else>
-        <el-form-item label="Gradient Start Color">
+        <el-form-item label="渐变起始颜色">
           <el-color-picker v-model="localConfig.gradientColors[0]" show-alpha />
         </el-form-item>
         
-        <el-form-item label="Gradient End Color">
+        <el-form-item label="渐变结束颜色">
           <el-color-picker v-model="localConfig.gradientColors[1]" show-alpha />
         </el-form-item>
       </template>
       
-      <el-divider>Effects</el-divider>
+      <el-divider>特效</el-divider>
       
-      <el-form-item label="Text Shadow">
+      <el-form-item label="文字阴影">
         <el-switch v-model="localConfig.textShadow" />
       </el-form-item>
       
       <template v-if="localConfig.textShadow">
-        <el-form-item label="Shadow Color">
+        <el-form-item label="阴影颜色">
           <el-color-picker v-model="localConfig.shadowColor" show-alpha />
         </el-form-item>
         
-        <el-form-item label="Shadow Blur">
+        <el-form-item label="阴影模糊度">
           <el-slider v-model="localConfig.shadowBlur" :min="0" :max="20" show-input />
         </el-form-item>
       </template>
       
       <el-form-item>
         <el-button-group>
-          <el-button type="primary" @click="applyPreset('modern')">Modern</el-button>
-          <el-button type="success" @click="applyPreset('neon')">Neon</el-button>
-          <el-button type="warning" @click="applyPreset('retro')">Retro</el-button>
-          <el-button type="danger" @click="applyPreset('minimal')">Minimal</el-button>
+          <el-button type="primary" @click="applyPreset('modern')">现代风格</el-button>
+          <el-button type="success" @click="applyPreset('neon')">霓虹风格</el-button>
+          <el-button type="warning" @click="applyPreset('retro')">复古风格</el-button>
+          <el-button type="danger" @click="applyPreset('minimal')">简约风格</el-button>
         </el-button-group>
       </el-form-item>
     </el-form>

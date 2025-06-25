@@ -12,13 +12,13 @@
 import { ref, onMounted, computed } from 'vue';
 import { decodeConfig } from '../utils/configUtils';
 
-// Import widget components
+// 导入小组件组件
 import ClockWidget from '../widgets/ClockWidget.vue';
 import DateWidget from '../widgets/DateWidget.vue';
 import TextWidget from '../widgets/TextWidget.vue';
 import ImageWidget from '../widgets/ImageWidget.vue';
 
-// Widget registry
+// 小组件注册表
 const widgetRegistry = {
   'clock': ClockWidget,
   'date': DateWidget,
@@ -42,7 +42,7 @@ onMounted(() => {
       widgetType.value = decodedData.type;
       widgetConfig.value = decodedData.config;
     } catch (e) {
-      console.error('Invalid configuration in URL', e);
+      console.error('URL 中的配置无效', e);
     }
   }
 });

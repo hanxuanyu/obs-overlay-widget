@@ -1,6 +1,7 @@
 <template>
   <div class="clock-widget" :style="clockStyle">
-    {{ currentTime }}
+    <div>{{ currentTime }}</div>
+    <div v-if="props.config.showDate" :style="clockStyle">{{ currentDate }}</div>
   </div>
 </template>
 
@@ -21,6 +22,8 @@ interface ClockConfig {
   useGradient: boolean;
   gradientColors: string[];
   showSeconds: boolean;
+  showDate: boolean;
+  dateFormat: string;
 }
 
 // Define props with default values
@@ -38,18 +41,27 @@ const props = withDefaults(defineProps<{
     shadowBlur: 4,
     useGradient: false,
     gradientColors: ['#ff0000', '#0000ff'],
-    showSeconds: true
+    showSeconds: true,
+    showDate: false,
+    dateFormat: 'YYYY-MM-DD'
   })
 });
 
-// State for current time
+// State for current time and date
 const currentTime = ref('');
+const currentDate = ref('');
 
 // Update time string based on format
 const updateTime = () => {
   const currentFormat = props.config.format || 'HH:mm:ss';
   const format = props.config.showSeconds ? currentFormat : currentFormat.replace(':ss', '');
   currentTime.value = dayjs().format(format);
+  
+  // Update date if enabled
+  if (props.config.showDate) {
+    const dateFormat = props.config.dateFormat || 'YYYY-MM-DD';
+    currentDate.value = dayjs().format(dateFormat);
+  }
 };
 
 // Interval for updating time
@@ -71,7 +83,7 @@ onUnmounted(() => {
   }
 });
 
-// Update interval if showSeconds changes
+// Watch for showSeconds changes
 watch(() => props.config.showSeconds, (newValue) => {
   if (timeInterval !== null) {
     window.clearInterval(timeInterval);
@@ -81,6 +93,11 @@ watch(() => props.config.showSeconds, (newValue) => {
   timeInterval = window.setInterval(updateTime, intervalTime);
   updateTime();
 });
+
+// Watch for showDate or dateFormat changes
+watch([() => props.config.showDate, () => props.config.dateFormat], () => {
+  updateTime();
+}, { deep: true });
 
 // Computed styles for the clock
 const clockStyle = computed(() => {
@@ -116,5 +133,6 @@ const clockStyle = computed(() => {
   padding: 10px;
   font-family: Arial, sans-serif;
   user-select: none;
+  text-align: center;
 }
 </style>

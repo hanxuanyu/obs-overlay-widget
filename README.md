@@ -1,62 +1,62 @@
-# OBS Overlay Widget
+# OBS 悬浮小组件
 
-A collection of highly customizable widgets for OBS Studio streaming and recording, built with Vue 3, TypeScript, and Vite.
+一个为 OBS Studio 直播和录制场景开发的高度可定制化小组件集合，基于 Vue 3、TypeScript 和 Vite 构建。
 
-## Features
+## 功能特点
 
-- **Time and Date Display**: Customizable formats for showing current time and date
-- **Text Display**: Show fixed text or API-returned content with custom styling
-- **Image Display**: Display local or remote images with customization options
-- **Split View Interface**: Configuration panel on the left, real-time preview on the right
-- **Transparent Background**: All widgets have transparent backgrounds suitable for OBS overlay
-- **URL Generation**: Automatically generates sharable URLs with encoded configuration
-- **Pure Preview Mode**: Open generated URLs to display only the widget with transparent background
+- **时间和日期显示**：可自定义格式的时间和日期显示
+- **文本显示**：展示固定文字或 API 返回内容，支持自定义样式
+- **图片显示**：展示本地或远程图片，支持自定义设置
+- **分屏界面**：左侧为配置面板，右侧为实时预览
+- **透明背景**：所有小组件均具有适合 OBS 悬浮的透明背景
+- **URL 生成**：自动生成包含编码配置的可分享 URL
+- **纯预览模式**：打开生成的 URL 仅显示小组件内容，无配置界面，背景透明
 
-## Widget Types
+## 小组件类型
 
-1. **Clock Widget**: Display current time with customizable format, style, and effects
-2. **Date Widget**: Show current date with customizable format, style, and effects
-3. **Text Widget**: Display text with customizable styles including gradients, shadows, and fonts
-4. **Image Widget**: Show images with customizable size, effects, and positioning
+1. **时钟小组件**：显示当前时间，可自定义格式、样式和特效
+2. **日期小组件**：显示当前日期，可自定义格式、样式和特效
+3. **文本小组件**：显示文本，支持渐变、阴影、字体等自定义样式
+4. **图片小组件**：显示图片，可自定义大小、特效和位置
 
-## Usage
+## 使用方法
 
-1. Select a widget type from the dropdown
-2. Configure the widget using the control panel on the left
-3. See real-time preview on the right
-4. Copy the generated URL to use in OBS Studio as a Browser Source
+1. 从下拉菜单中选择小组件类型
+2. 使用左侧控制面板配置小组件
+3. 在右侧实时查看预览效果
+4. 复制生成的 URL，在 OBS Studio 中作为浏览器源使用
 
-## Development
+## 开发
 
 ```bash
-# Install dependencies
+# 安装依赖
 npm install
 
-# Start development server
+# 启动开发服务器
 npm run dev
 
-# Build for production
+# 构建生产版本
 npm run build
 
-# Preview production build
+# 预览生产构建
 npm run preview
 ```
 
-## Troubleshooting
+## 故障排除
 
-If you encounter TypeScript errors related to undefined properties, make sure that:
+如果遇到与未定义属性相关的 TypeScript 错误，请确保：
 
-1. All widget components handle possible undefined configuration properties
-2. Default values are provided for all configuration options
-3. Use proper null checking (e.g., `props.config.property || defaultValue`)
+1. 所有小组件组件都能处理可能未定义的配置属性
+2. 为所有配置选项提供默认值
+3. 使用适当的空值检查（例如：`props.config.property || defaultValue`）
 
-## Integration with OBS Studio
+## 与 OBS Studio 集成
 
-1. Run this application on a web server or locally
-2. Configure your widget using the configuration interface
-3. Copy the generated URL
-4. In OBS Studio:
-   - Add a "Browser Source" to your scene
-   - Paste the URL into the Browser Source URL field
-   - Set width and height according to your needs
-   - Check "Shutdown source when not visible" for better performance
+1. 在 Web 服务器或本地运行此应用
+2. 使用配置界面设置您的小组件
+3. 复制生成的 URL
+4. 在 OBS Studio 中：
+   - 向您的场景添加"浏览器源"
+   - 将 URL 粘贴到浏览器源 URL 字段
+   - 根据需要设置宽度和高度
+   - 勾选"不可见时关闭源"以获得更好的性能
