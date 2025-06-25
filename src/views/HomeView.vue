@@ -32,35 +32,11 @@
         <h2>可用小组件</h2>
         
         <div class="widget-list">
-          <div class="widget-item">
-            <div class="widget-icon">⏰</div>
+          <div v-for="widget in widgets" :key="widget.value" class="widget-item">
+            <div class="widget-icon">{{ widget.icon }}</div>
             <div class="widget-info">
-              <h3>时钟小组件</h3>
-              <p>显示当前时间，可自定义格式、样式和特效</p>
-            </div>
-          </div>
-          
-          <div class="widget-item">
-            <div class="widget-icon">📅</div>
-            <div class="widget-info">
-              <h3>日期小组件</h3>
-              <p>显示当前日期，可自定义格式、样式和特效</p>
-            </div>
-          </div>
-          
-          <div class="widget-item">
-            <div class="widget-icon">📝</div>
-            <div class="widget-info">
-              <h3>文本小组件</h3>
-              <p>显示文本，支持渐变、阴影、字体等自定义样式</p>
-            </div>
-          </div>
-          
-          <div class="widget-item">
-            <div class="widget-icon">🖼️</div>
-            <div class="widget-info">
-              <h3>图片小组件</h3>
-              <p>显示图片，可自定义大小、特效和位置</p>
+              <h3>{{ widget.label }}</h3>
+              <p>{{ widget.description }}</p>
             </div>
           </div>
         </div>
@@ -76,8 +52,50 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
 import { Setting, Document } from '@element-plus/icons-vue';
+import { ref, onMounted } from 'vue';
+
+// 导入已注册的小组件信息
+import { widgets as registeredWidgets } from '../widgets/registry';
 
 const router = useRouter();
+
+// 定义小组件项的类型
+interface WidgetItem {
+  value: string;
+  label: string;
+  icon: string;
+  description: string;
+}
+
+const widgets = ref<WidgetItem[]>([]);
+
+// 小组件图标映射
+const widgetIcons = {
+  'clock': '⏰',
+  'date': '📅',
+  'text': '📝',
+  'image': '🖼️',
+  // 可以为其他小组件添加图标
+};
+
+// 小组件描述映射
+const widgetDescriptions = {
+  'clock': '显示当前时间，可自定义格式、样式和特效',
+  'date': '显示当前日期，可自定义格式、样式和特效',
+  'text': '显示文本，支持渐变、阴影、字体等自定义样式',
+  'image': '显示图片，可自定义大小、特效和位置',
+  // 可以为其他小组件添加描述
+};
+
+// 初始化时加载小组件
+onMounted(() => {
+  widgets.value = registeredWidgets.map((widget: any) => ({
+    value: widget.value as string,
+    label: widget.label as string,
+    icon: widgetIcons[widget.value as keyof typeof widgetIcons] || '🔧', // 默认图标
+    description: widgetDescriptions[widget.value as keyof typeof widgetDescriptions] || '自定义小组件'
+  }));
+});
 
 const goToConfig = () => {
   router.push('/config');
@@ -85,7 +103,7 @@ const goToConfig = () => {
 
 const goToDoc = () => {
   // 在实际应用中，这里会跳转到文档页面
-  window.open('https://github.com/yourusername/obs-overlay-widget', '_blank');
+  window.open('https://github.com/hanxuanyu/obs-overlay-widget', '_blank');
 };
 </script>
 
@@ -94,11 +112,15 @@ const goToDoc = () => {
   min-height: 100vh;
   background-color: #f5f7fa;
   padding: 20px;
+  /* 添加溢出滚动，确保内容可以完整显示 */
+  overflow-y: auto;
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
+  /* 添加底部间距，确保页脚有足够空间 */
+  padding-bottom: 30px;
 }
 
 .header {
@@ -175,8 +197,10 @@ const goToDoc = () => {
 
 .widget-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 20px;
+  /* 确保底部有足够的边距 */
+  margin-bottom: 30px;
 }
 
 .widget-item {
@@ -185,6 +209,13 @@ const goToDoc = () => {
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  /* 添加过渡效果 */
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.widget-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.12);
 }
 
 .widget-icon {
