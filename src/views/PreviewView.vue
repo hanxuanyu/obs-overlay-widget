@@ -33,7 +33,9 @@ const widgetComponent = computed(() => {
 });
 
 onMounted(() => {
-  const queryParams = new URLSearchParams(window.location.search);
+  // 在 hash 模式下获取 URL 参数
+  const searchParams = window.location.href.split('?')[1];
+  const queryParams = new URLSearchParams(searchParams || '');
   const data = queryParams.get('data');
   
   if (data) {

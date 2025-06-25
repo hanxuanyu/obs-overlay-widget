@@ -79,7 +79,7 @@ const updateGeneratedUrl = () => {
     type: selectedWidget.value,
     config: currentWidgetConfig.value
   });
-  generatedUrl.value = `${baseUrl}/preview?data=${configStr}`;
+  generatedUrl.value = `${baseUrl}/#/preview?data=${configStr}`;
 };
 
 // 复制 URL 到剪贴板
