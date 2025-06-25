@@ -7,18 +7,21 @@
         </el-select>
       </div>
       
-      <div class="config-panel">
-        <component :is="currentConfigComponent" v-if="currentConfigComponent" @update:config="updateWidgetConfig" :config="currentWidgetConfig" />
-      </div>
-      
-      <div class="url-generator">
-        <el-input v-model="generatedUrl" readonly>
-          <template #append>
-            <el-button @click="copyUrl">
-              <el-icon><CopyDocument /></el-icon> 复制
-            </el-button>
-          </template>
-        </el-input>
+      <div class="config-container">
+        <div class="config-panel">
+          <component :is="currentConfigComponent" v-if="currentConfigComponent" @update:config="updateWidgetConfig" :config="currentWidgetConfig" />
+        </div>
+        
+        <div class="url-generator">
+          <h3>生成的URL链接</h3>
+          <el-input v-model="generatedUrl" readonly size="large">
+            <template #append>
+              <el-button @click="copyUrl">
+                <el-icon><CopyDocument /></el-icon> 复制
+              </el-button>
+            </template>
+          </el-input>
+        </div>
       </div>
     </div>
     
@@ -204,6 +207,14 @@ watch([selectedWidget, currentWidgetConfig], () => {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  /* 确保底部有足够的边距 */
+  padding-bottom: 30px;
+}
+
+.config-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .right-panel {
@@ -226,11 +237,24 @@ watch([selectedWidget, currentWidgetConfig], () => {
 }
 
 .config-panel {
-  flex-grow: 1;
+  /* 配置面板可以滚动，但不挤压URL生成器 */
+  overflow-y: auto;
+  flex: 1;
+  margin-bottom: 20px;
 }
 
 .url-generator {
-  margin-top: 20px;
+  /* URL生成器固定在底部 */
+  margin-top: auto;
+  padding: 10px 0;
+  border-top: 1px solid #eaeaea;
+}
+
+.url-generator h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #606266;
 }
 
 .preview-container {
