@@ -1,5 +1,5 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -26,18 +26,40 @@ body {
   background-color: transparent !important;
 }
 
+/* 确保滚动行为平滑 */
+html {
+  scroll-behavior: smooth;
+}
+
+/* 全局文本选择样式 */
+::selection {
+  background-color: rgba(52, 152, 219, 0.3);
+  color: #2c3e50;
+}
+
+/* 按钮通用样式改进 */
+button {
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
     background-color: transparent;
   }
 }
+
 button:hover {
-  border-color: #646cff;
+  border-color: #3498db;
+  transform: translateY(-2px);
 }
+
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 2px solid #3498db;
+  outline-offset: 2px;
 }
 
 .card {
@@ -45,10 +67,10 @@ button:focus-visible {
 }
 
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
 }
 
 @media (prefers-color-scheme: light) {
@@ -57,9 +79,9 @@ button:focus-visible {
     background-color: #ffffff;
   }
   a:hover {
-    color: #747bff;
+    color: #3498db;
   }
   button {
-    background-color: #f9f9f9;
+    background-color: #f8f9fa;
   }
 }
