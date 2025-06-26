@@ -183,7 +183,7 @@ onMounted(() => {
 // Preset styles
 const presets = {
   modern: {
-    format: 'HH:mm',
+    format: 'HH:mm:ss',
     fontSize: 72,
     fontFamily: 'Arial',
     fontWeight: 'bold',
@@ -192,7 +192,7 @@ const presets = {
     textShadow: true,
     shadowColor: 'rgba(0, 0, 0, 0.3)',
     shadowBlur: 10,
-    showSeconds: false,
+    showSeconds: true,
     showDate: true,
     dateFormat: 'YYYY-MM-DD'
   },
@@ -202,7 +202,7 @@ const presets = {
     fontFamily: 'Impact',
     fontWeight: 'normal',
     color: '#39ff14',
-    useGradient: false,
+    useGradient: true,
     textShadow: true,
     shadowColor: 'rgba(57, 255, 20, 0.8)',
     shadowBlur: 15,
@@ -219,7 +219,7 @@ const presets = {
     textShadow: true,
     shadowColor: 'rgba(0, 0, 0, 0.5)',
     shadowBlur: 5,
-    showSeconds: false,
+    showSeconds: true,
     showDate: true,
     dateFormat: 'MMMM D, YYYY'
   },
