@@ -13,7 +13,7 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   overflow-x: hidden; /* 只隐藏水平滚动条 */
   overflow-y: auto; /* 允许垂直滚动 */
-  background-color: #f5f7fa;
+  background-color: #f5f7fa00;
 }
 
 #app {
