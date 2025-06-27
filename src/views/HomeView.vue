@@ -52,50 +52,14 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
 import { Setting, Document } from '@element-plus/icons-vue';
-import { ref, onMounted } from 'vue';
 
-// 导入已注册的小组件信息
-import { widgets as registeredWidgets } from '../widgets/registry';
+// 导入小组件显示信息
+import { getWidgetItems } from '../widgets/registry';
 
 const router = useRouter();
 
-// 定义小组件项的类型
-interface WidgetItem {
-  value: string;
-  label: string;
-  icon: string;
-  description: string;
-}
-
-const widgets = ref<WidgetItem[]>([]);
-
-// 小组件图标映射
-const widgetIcons = {
-  'clock': '⏰',
-  'date': '📅',
-  'text': '📝',
-  'image': '🖼️',
-  // 可以为其他小组件添加图标
-};
-
-// 小组件描述映射
-const widgetDescriptions = {
-  'clock': '显示当前时间，可自定义格式、样式和特效',
-  'date': '显示当前日期，可自定义格式、样式和特效',
-  'text': '显示文本，支持渐变、阴影、字体等自定义样式',
-  'image': '显示图片，可自定义大小、特效和位置',
-  // 可以为其他小组件添加描述
-};
-
-// 初始化时加载小组件
-onMounted(() => {
-  widgets.value = registeredWidgets.map((widget: any) => ({
-    value: widget.value as string,
-    label: widget.label as string,
-    icon: widgetIcons[widget.value as keyof typeof widgetIcons] || '🔧', // 默认图标
-    description: widgetDescriptions[widget.value as keyof typeof widgetDescriptions] || '自定义小组件'
-  }));
-});
+// 获取所有可用的小组件列表
+const widgets = getWidgetItems();
 
 const goToConfig = () => {
   router.push('/config');

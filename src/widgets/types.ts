@@ -9,12 +9,17 @@ export interface BaseWidgetConfig {
 export interface WidgetRegistration {
   label: string;
   value: string;
+  icon: string;
+  description: string;
   component: Component;
   configComponent: Component;
   getDefaultConfig: () => BaseWidgetConfig;
 }
 
-// 小组件模块导出接口
-export interface WidgetModule {
-  registration: WidgetRegistration;
+// 小组件列表项接口（用于 UI 显示）
+export interface WidgetItem {
+  value: string;
+  label: string;
+  icon: string;
+  description: string;
 }
