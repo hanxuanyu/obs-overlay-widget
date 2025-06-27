@@ -1,5 +1,5 @@
 <template>
-  <div class="preview-view">
+  <div class="preview-view transparent-bg">
     <component 
       :is="widgetComponent" 
       v-if="widgetComponent" 
@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted, onUnmounted, computed } from 'vue';
 import { decodeConfig } from '../utils/configUtils';
 import { widgets } from '../widgets/registry';
 
@@ -26,6 +26,10 @@ const widgetComponent = computed(() => {
 });
 
 onMounted(() => {
+  // 为body添加透明背景类
+  document.body.classList.add('preview-mode');
+  document.documentElement.classList.add('preview-mode');
+  
   // 在 hash 模式下获取 URL 参数
   const searchParams = window.location.href.split('?')[1];
   const queryParams = new URLSearchParams(searchParams || '');
@@ -41,6 +45,12 @@ onMounted(() => {
     }
   }
 });
+
+onUnmounted(() => {
+  // 清理透明背景类
+  document.body.classList.remove('preview-mode');
+  document.documentElement.classList.remove('preview-mode');
+});
 </script>
 
 <style scoped>
@@ -50,6 +60,12 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: transparent;
+  background-color: transparent !important;
+  background: transparent !important;
+}
+
+.transparent-bg {
+  background: rgba(0, 0, 0, 0) !important;
+  background-color: rgba(0, 0, 0, 0) !important;
 }
 </style>

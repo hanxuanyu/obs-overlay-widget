@@ -24,6 +24,20 @@ body {
 /* Preview mode specific styles */
 .preview-view {
   background-color: transparent !important;
+  background: transparent !important;
+}
+
+/* 为预览页面专门设置透明背景 */
+body.preview-mode,
+html.preview-mode {
+  background-color: transparent !important;
+  background: transparent !important;
+}
+
+/* 确保 #app 在预览模式下也是透明的 */
+body.preview-mode #app {
+  background-color: transparent !important;
+  background: transparent !important;
 }
 
 /* 确保滚动行为平滑 */
@@ -76,8 +90,17 @@ button:focus-visible {
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #ffffff;
+    background-color: transparent;
   }
+  
+  /* 确保预览模式下即使在浅色主题也是透明的 */
+  body.preview-mode,
+  html.preview-mode,
+  body.preview-mode #app {
+    background-color: transparent !important;
+    background: transparent !important;
+  }
+  
   a:hover {
     color: #3498db;
   }
