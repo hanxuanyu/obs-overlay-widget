@@ -1,7 +1,7 @@
 # OBS 悬浮小组件
 
-[![Deploy to GitHub Pages](https://github.com/USERNAME/obs-overlay-widget/actions/workflows/deploy.yml/badge.svg)](https://github.com/USERNAME/obs-overlay-widget/actions/workflows/deploy.yml)
-[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live%20Demo-brightgreen)](https://USERNAME.github.io/obs-overlay-widget/)
+[![Deploy to GitHub Pages](https://github.com/hanxuanyu/obs-overlay-widget/actions/workflows/deploy.yml/badge.svg)](https://github.com/hanxuanyu/obs-overlay-widget/actions/workflows/deploy.yml)
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live%20Demo-brightgreen)](https://hanxuanyu.github.io/obs-overlay-widget/)
 [![Vue 3](https://img.shields.io/badge/Vue-3-brightgreen.svg)](https://vuejs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/Vite-Powered-646CFF.svg)](https://vitejs.dev/)
@@ -10,19 +10,18 @@
 
 ## 🚀 在线预览
 
-📺 **[立即体验 - GitHub Pages](https://USERNAME.github.io/obs-overlay-widget/)**
+📺 **[立即体验 - GitHub Pages](https://hanxuanyu.github.io/obs-overlay-widget/)**
 
-> 注意：请将上面链接中的 `USERNAME` 替换为你的 GitHub 用户名
 
 ## 📦 快速开始
 
 ### 方式一：直接使用（推荐）
-直接访问 [在线版本](https://USERNAME.github.io/obs-overlay-widget/)，配置你的小组件并复制生成的URL到OBS中使用。
+直接访问 [在线版本](https://hanxuanyu.github.io/obs-overlay-widget/)，配置你的小组件并复制生成的URL到OBS中使用。
 
 ### 方式二：本地部署
 ```bash
 # 克隆项目
-git clone https://github.com/USERNAME/obs-overlay-widget.git
+git clone https://github.com/hanxuanyu/obs-overlay-widget.git
 cd obs-overlay-widget
 
 # 安装依赖
@@ -34,8 +33,8 @@ npm run dev
 
 ## 🎯 部署状态
 
-- **主分支构建**：[![Deploy Status](https://github.com/USERNAME/obs-overlay-widget/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/USERNAME/obs-overlay-widget/actions/workflows/deploy.yml)
-- **在线版本**：[https://USERNAME.github.io/obs-overlay-widget/](https://USERNAME.github.io/obs-overlay-widget/)
+- **主分支构建**：[![Deploy Status](https://github.com/hanxuanyu/obs-overlay-widget/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/hanxuanyu/obs-overlay-widget/actions/workflows/deploy.yml)
+- **在线版本**：[https://hanxuanyu.github.io/obs-overlay-widget/](https://hanxuanyu.github.io/obs-overlay-widget/)
 - **最后更新**：自动同步 GitHub 主分支
 
 ## 功能特点
