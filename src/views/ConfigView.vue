@@ -44,6 +44,7 @@ import { ref, computed, onMounted, watch } from 'vue';
 import { CopyDocument, View } from '@element-plus/icons-vue';
 import { ElMessage } from 'element-plus';
 import { encodeConfig, decodeConfig } from '../utils/configUtils';
+import { generatePreviewUrl } from '../utils/urlUtils';
 
 // 导入小组件注册表
 import { widgets, getDefaultConfig } from '../widgets/registry';
@@ -78,12 +79,12 @@ const updateWidgetConfig = (newConfig: any) => {
 
 // 生成预览 URL
 const updateGeneratedUrl = () => {
-  const baseUrl = window.location.origin;
   const configStr = encodeConfig({
     type: selectedWidget.value,
     config: currentWidgetConfig.value
   });
-  generatedUrl.value = `${baseUrl}/#/preview?data=${configStr}`;
+  
+  generatedUrl.value = generatePreviewUrl(configStr);
 };
 
 // 复制 URL 到剪贴板

@@ -1,6 +1,42 @@
 # OBS 悬浮小组件
 
+[![Deploy to GitHub Pages](https://github.com/USERNAME/obs-overlay-widget/actions/workflows/deploy.yml/badge.svg)](https://github.com/USERNAME/obs-overlay-widget/actions/workflows/deploy.yml)
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live%20Demo-brightgreen)](https://USERNAME.github.io/obs-overlay-widget/)
+[![Vue 3](https://img.shields.io/badge/Vue-3-brightgreen.svg)](https://vuejs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-Powered-646CFF.svg)](https://vitejs.dev/)
+
 一个为 OBS Studio 直播和录制场景开发的高度可定制化小组件集合，基于 Vue 3、TypeScript 和 Vite 构建。
+
+## 🚀 在线预览
+
+📺 **[立即体验 - GitHub Pages](https://USERNAME.github.io/obs-overlay-widget/)**
+
+> 注意：请将上面链接中的 `USERNAME` 替换为你的 GitHub 用户名
+
+## 📦 快速开始
+
+### 方式一：直接使用（推荐）
+直接访问 [在线版本](https://USERNAME.github.io/obs-overlay-widget/)，配置你的小组件并复制生成的URL到OBS中使用。
+
+### 方式二：本地部署
+```bash
+# 克隆项目
+git clone https://github.com/USERNAME/obs-overlay-widget.git
+cd obs-overlay-widget
+
+# 安装依赖
+npm install
+
+# 启动开发服务器
+npm run dev
+```
+
+## 🎯 部署状态
+
+- **主分支构建**：[![Deploy Status](https://github.com/USERNAME/obs-overlay-widget/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/USERNAME/obs-overlay-widget/actions/workflows/deploy.yml)
+- **在线版本**：[https://USERNAME.github.io/obs-overlay-widget/](https://USERNAME.github.io/obs-overlay-widget/)
+- **最后更新**：自动同步 GitHub 主分支
 
 ## 功能特点
 
@@ -91,7 +127,9 @@
   - 运动计时：适合健身和运动的动感样式
   - 简约风格：简洁的极简主义设计
 
-## 开发
+## 💻 开发
+
+### 基础命令
 
 ```bash
 # 安装依赖
@@ -100,12 +138,33 @@ npm install
 # 启动开发服务器
 npm run dev
 
-# 构建生产版本
+# 构建生产版本（适用于手动部署）
 npm run build
+
+# 构建GitHub Pages版本
+npm run build:github
 
 # 预览生产构建
 npm run preview
 ```
+
+### 🚀 部署方式
+
+| 部署方式 | 构建命令 | 说明 |
+|----------|----------|------|
+| **GitHub Pages** | `npm run build:github` | 自动部署，推送到main分支即可 |
+| **手动部署** | `npm run build` | 将`dist`文件夹上传到任意Web服务器 |
+| **开发预览** | `npm run dev` | 本地开发和测试 |
+
+### 🔄 自动部署
+
+项目配置了GitHub Actions自动部署：
+
+1. **触发条件**：推送代码到`main`或`master`分支
+2. **构建过程**：自动安装依赖、构建、部署到GitHub Pages
+3. **访问地址**：`https://USERNAME.github.io/obs-overlay-widget/`
+
+查看部署状态：[![Deploy Status](https://github.com/USERNAME/obs-overlay-widget/actions/workflows/deploy.yml/badge.svg)](https://github.com/USERNAME/obs-overlay-widget/actions)
 
 ## 项目结构
 
@@ -388,13 +447,62 @@ case 'new':
 2. 为所有配置选项提供默认值
 3. 使用适当的空值检查（例如：`props.config.property || defaultValue`）
 
-## 与 OBS Studio 集成
+## 🎬 与 OBS Studio 集成
 
-1. 在 Web 服务器或本地运行此应用
-2. 使用配置界面设置您的小组件
-3. 复制生成的 URL
-4. 在 OBS Studio 中：
+1. **获取小组件URL**：
+   - 访问 [在线配置页面](https://hanxuanyu.github.io/obs-overlay-widget/)
+   - 选择和配置您需要的小组件
+   - 复制生成的URL
+
+2. **在OBS中添加浏览器源**：
    - 向您的场景添加"浏览器源"
-   - 将 URL 粘贴到浏览器源 URL 字段
-   - 根据需要设置宽度和高度
+   - 将URL粘贴到浏览器源URL字段
+   - 设置合适的宽度和高度
    - 勾选"不可见时关闭源"以获得更好的性能
+
+3. **推荐设置**：
+   - 宽度：1920px（或您的分辨率宽度）
+   - 高度：1080px（或您的分辨率高度）
+   - 自定义CSS：`body { margin: 0; }`
+
+## 📊 项目状态
+
+- **构建状态**：[![Build Status](https://github.com/hanxuanyu/obs-overlay-widget/actions/workflows/deploy.yml/badge.svg)](https://github.com/hanxuanyu/obs-overlay-widget/actions)
+- **在线版本**：[![Live Demo](https://img.shields.io/badge/Demo-Live-success)](https://hanxuanyu.github.io/obs-overlay-widget/)
+- **许可证**：MIT
+- **技术栈**：Vue 3 + TypeScript + Vite + Element Plus
+
+## 🤝 贡献
+
+欢迎提交Issue和Pull Request！
+
+1. Fork 本仓库
+2. 创建你的特性分支 (`git checkout -b feature/AmazingFeature`)
+3. 提交你的更改 (`git commit -m 'Add some AmazingFeature'`)
+4. 推送到分支 (`git push origin feature/AmazingFeature`)
+5. 开启一个Pull Request
+
+## 📝 更新日志
+
+### v1.0.0
+- ✨ 基础小组件集合（时钟、日期、文本、图片、计时器）
+- 🎨 可视化配置界面
+- 🚀 GitHub Pages自动部署
+- 📱 响应式设计
+- 🔧 TypeScript支持
+
+## 📄 许可证
+
+本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情
+
+## 🙏 致谢
+
+- [Vue 3](https://vuejs.org/) - 渐进式JavaScript框架
+- [Element Plus](https://element-plus.org/) - Vue 3 UI组件库
+- [Vite](https://vitejs.dev/) - 下一代前端构建工具
+- [TypeScript](https://www.typescriptlang.org/) - JavaScript的超集
+
+---
+
+
+**⭐ 如果这个项目对你有帮助，请给个Star支持一下！**
