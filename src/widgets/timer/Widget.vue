@@ -23,7 +23,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
-import type { TimerConfig, TimerStatus, TimerMode } from './types';
+import type { TimerConfig, TimerStatus } from './types';
 
 // Define props with default values
 const props = withDefaults(defineProps<{
@@ -125,8 +125,8 @@ const progressFillStyle = computed(() => {
 
 // 容器样式
 const containerStyle = computed(() => ({
-  textAlign: 'center',
-  userSelect: 'none'
+  textAlign: 'center' as const,
+  userSelect: 'none' as const
 }));
 
 // 计时器显示样式
@@ -292,7 +292,7 @@ watch(() => props.config.duration, (newDuration) => {
   }
 });
 
-watch(() => props.config.mode, (newMode) => {
+watch(() => props.config.mode, () => {
   resetTimer();
 });
 

@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
+    "build:github": "vue-tsc -b && cross-env VITE_BASE_PATH=/obs-overlay-widget/ vite build",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -16,8 +17,10 @@
     "vue-router": "^4.5.1"
   },
   "devDependencies": {
+    "@types/node": "^24.0.4",
     "@vitejs/plugin-vue": "^6.0.0",
     "@vue/tsconfig": "^0.7.0",
+    "cross-env": "^7.0.3",
     "typescript": "~5.8.3",
     "vite": "^7.0.0",
     "vue-tsc": "^2.2.10"

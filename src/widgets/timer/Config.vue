@@ -182,7 +182,7 @@
 
 <script setup lang="ts">
 import { ref, computed, watch, onMounted } from 'vue';
-import type { TimerConfig } from './types';
+import type { TimerConfig, TimerMode } from './types';
 
 // Define props with default values
 const props = withDefaults(defineProps<{
@@ -271,12 +271,13 @@ onMounted(() => {
 // Preset styles
 const presets = {
   gaming: {
-    mode: 'countdown',
+    mode: 'countdown' as TimerMode,
     duration: 1800, // 30分钟
     format: 'mm:ss',
     fontSize: 64,
     fontFamily: 'Impact',
     fontWeight: 'bold',
+    color: '#ff6b35',
     useGradient: true,
     gradientColors: ['#ff6b35', '#f7931e'],
     textShadow: true,
@@ -288,10 +289,13 @@ const presets = {
     warningThreshold: 60,
     warningColor: '#ff0000',
     playSound: true,
-    soundVolume: 80
+    soundVolume: 80,
+    autoStart: false,
+    showMilliseconds: false,
+    finishedColor: '#ff0000'
   },
   meeting: {
-    mode: 'countdown',
+    mode: 'countdown' as TimerMode,
     duration: 3600, // 60分钟
     format: 'hh:mm:ss',
     fontSize: 52,
@@ -299,6 +303,7 @@ const presets = {
     fontWeight: 'normal',
     color: '#2ecc71',
     useGradient: false,
+    gradientColors: ['#2ecc71', '#27ae60'],
     textShadow: true,
     shadowColor: 'rgba(0, 0, 0, 0.3)',
     shadowBlur: 4,
@@ -309,24 +314,36 @@ const presets = {
     warningColor: '#f39c12',
     finishedColor: '#e74c3c',
     playSound: true,
-    soundVolume: 60
+    soundVolume: 60,
+    autoStart: false,
+    showMilliseconds: false
   },
   workout: {
-    mode: 'stopwatch',
+    mode: 'stopwatch' as TimerMode,
+    duration: 0,
     format: 'mm:ss',
     fontSize: 72,
     fontFamily: 'JetBrains Mono',
     fontWeight: 'bold',
+    color: '#e74c3c',
     useGradient: true,
     gradientColors: ['#e74c3c', '#c0392b'],
     textShadow: true,
     shadowColor: 'rgba(0, 0, 0, 0.5)',
     shadowBlur: 6,
     showMilliseconds: true,
-    autoStart: false
+    autoStart: false,
+    showProgress: false,
+    progressColor: '#e74c3c',
+    progressHeight: 4,
+    warningThreshold: 0,
+    warningColor: '#f39c12',
+    finishedColor: '#e74c3c',
+    playSound: false,
+    soundVolume: 50
   },
   minimal: {
-    mode: 'countdown',
+    mode: 'countdown' as TimerMode,
     duration: 300,
     format: 'mm:ss',
     fontSize: 48,
@@ -334,10 +351,20 @@ const presets = {
     fontWeight: 'lighter',
     color: '#ffffff',
     useGradient: false,
+    gradientColors: ['#ffffff', '#f8f9fa'],
     textShadow: false,
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowBlur: 4,
     showProgress: false,
+    progressColor: '#ffffff',
+    progressHeight: 4,
+    warningThreshold: 30,
+    warningColor: '#f39c12',
+    finishedColor: '#e74c3c',
     playSound: false,
-    autoStart: false
+    soundVolume: 50,
+    autoStart: false,
+    showMilliseconds: false
   }
 };
 
