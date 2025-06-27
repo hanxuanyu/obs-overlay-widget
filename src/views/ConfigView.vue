@@ -8,19 +8,23 @@
       </div>
       
       <div class="config-container">
-        <div class="config-panel">
-          <component :is="currentConfigComponent" v-if="currentConfigComponent" @update:config="updateWidgetConfig" :config="currentWidgetConfig" />
-        </div>
-        
         <div class="url-generator">
           <h3>生成的URL链接</h3>
-          <el-input v-model="generatedUrl" readonly size="large">
-            <template #append>
-              <el-button @click="copyUrl">
+          <div class="url-input-group">
+            <el-input v-model="generatedUrl" readonly size="large" />
+            <div class="button-group">
+              <el-button @click="copyUrl" size="large">
                 <el-icon><CopyDocument /></el-icon> 复制
               </el-button>
-            </template>
-          </el-input>
+              <el-button @click="openPreview" size="large">
+                <el-icon><View /></el-icon> 打开
+              </el-button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="config-panel">
+          <component :is="currentConfigComponent" v-if="currentConfigComponent" @update:config="updateWidgetConfig" :config="currentWidgetConfig" />
         </div>
       </div>
     </div>
@@ -37,7 +41,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from 'vue';
-import { CopyDocument } from '@element-plus/icons-vue';
+import { CopyDocument, View } from '@element-plus/icons-vue';
 import { ElMessage } from 'element-plus';
 import { encodeConfig, decodeConfig } from '../utils/configUtils';
 
@@ -89,6 +93,15 @@ const copyUrl = () => {
   }).catch(() => {
     ElMessage.error('复制 URL 失败');
   });
+};
+
+// 打开预览页面
+const openPreview = () => {
+  if (generatedUrl.value) {
+    window.open(generatedUrl.value, '_blank');
+  } else {
+    ElMessage.warning('请先配置小组件');
+  }
 };
 
 // 加载时检查查询参数（用于直接链接）
@@ -161,17 +174,16 @@ watch([selectedWidget, currentWidgetConfig], () => {
 }
 
 .config-panel {
-  /* 配置面板可以滚动，但不挤压URL生成器 */
+  /* 配置面板可以滚动 */
   overflow-y: auto;
   flex: 1;
-  margin-bottom: 20px;
 }
 
 .url-generator {
-  /* URL生成器固定在底部 */
-  margin-top: auto;
+  /* URL生成器固定在顶部 */
+  margin-bottom: 20px;
   padding: 10px 0;
-  border-top: 1px solid #eaeaea;
+  border-bottom: 1px solid #eaeaea;
 }
 
 .url-generator h3 {
@@ -179,6 +191,17 @@ watch([selectedWidget, currentWidgetConfig], () => {
   margin-bottom: 10px;
   font-size: 16px;
   color: #606266;
+}
+
+.url-input-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.button-group {
+  display: flex;
+  gap: 8px;
 }
 
 .preview-container {

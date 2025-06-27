@@ -3,6 +3,19 @@
     <h2>时钟小组件设置</h2>
     
     <el-form label-position="top">
+      <el-divider>预设样式</el-divider>
+      
+      <el-form-item>
+        <el-button-group>
+          <el-button type="primary" @click="applyPreset('modern')">现代风格</el-button>
+          <el-button type="success" @click="applyPreset('neon')">霓虹风格</el-button>
+          <el-button type="warning" @click="applyPreset('elegant')">优雅风格</el-button>
+          <el-button type="danger" @click="applyPreset('minimal')">简约风格</el-button>
+        </el-button-group>
+      </el-form-item>
+
+      <el-divider>基本设置</el-divider>
+
       <el-form-item label="时间格式">
         <el-select v-model="localConfig.format" placeholder="选择格式">
           <el-option label="HH:mm:ss (24小时制)" value="HH:mm:ss" />
@@ -99,16 +112,6 @@
         </el-form-item>
       </template>
       
-      <el-divider>预设样式</el-divider>
-      
-      <el-form-item>
-        <el-button-group>
-          <el-button type="primary" @click="applyPreset('modern')">现代风格</el-button>
-          <el-button type="success" @click="applyPreset('neon')">霓虹风格</el-button>
-          <el-button type="warning" @click="applyPreset('elegant')">优雅风格</el-button>
-          <el-button type="danger" @click="applyPreset('minimal')">简约风格</el-button>
-        </el-button-group>
-      </el-form-item>
     </el-form>
   </div>
 </template>

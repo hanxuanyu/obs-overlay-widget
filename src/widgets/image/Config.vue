@@ -3,6 +3,19 @@
     <h2>图片小组件设置</h2>
     
     <el-form label-position="top">
+      <el-divider>预设样式</el-divider>
+      
+      <el-form-item>
+        <el-button-group>
+          <el-button type="primary" @click="applyPreset('normal')">正常</el-button>
+          <el-button type="success" @click="applyPreset('rounded')">圆角</el-button>
+          <el-button type="warning" @click="applyPreset('shadow')">阴影</el-button>
+          <el-button type="danger" @click="applyPreset('circular')">圆形</el-button>
+        </el-button-group>
+      </el-form-item>
+
+      <el-divider>基本设置</el-divider>
+
       <el-form-item label="图片URL">
         <el-input v-model="localConfig.imageUrl" placeholder="输入图片URL" />
       </el-form-item>
@@ -45,14 +58,6 @@
         </el-form-item>
       </template>
       
-      <el-form-item>
-        <el-button-group>
-          <el-button type="primary" @click="applyPreset('normal')">正常</el-button>
-          <el-button type="success" @click="applyPreset('rounded')">圆角</el-button>
-          <el-button type="warning" @click="applyPreset('shadow')">阴影</el-button>
-          <el-button type="danger" @click="applyPreset('circular')">圆形</el-button>
-        </el-button-group>
-      </el-form-item>
     </el-form>
   </div>
 </template>

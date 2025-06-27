@@ -3,6 +3,19 @@
     <h2>文本小组件设置</h2>
     
     <el-form label-position="top">
+      <el-divider>预设样式</el-divider>
+      
+      <el-form-item>
+        <el-button-group>
+          <el-button type="primary" @click="applyPreset('modern')">现代风格</el-button>
+          <el-button type="success" @click="applyPreset('neon')">霓虹风格</el-button>
+          <el-button type="warning" @click="applyPreset('retro')">复古风格</el-button>
+          <el-button type="danger" @click="applyPreset('minimal')">简约风格</el-button>
+        </el-button-group>
+      </el-form-item>
+
+      <el-divider>基本设置</el-divider>
+
       <el-form-item label="文本内容">
         <el-input v-model="localConfig.text" type="textarea" :rows="3" placeholder="输入要显示的文本" />
       </el-form-item>
@@ -71,14 +84,6 @@
         </el-form-item>
       </template>
       
-      <el-form-item>
-        <el-button-group>
-          <el-button type="primary" @click="applyPreset('modern')">现代风格</el-button>
-          <el-button type="success" @click="applyPreset('neon')">霓虹风格</el-button>
-          <el-button type="warning" @click="applyPreset('retro')">复古风格</el-button>
-          <el-button type="danger" @click="applyPreset('minimal')">简约风格</el-button>
-        </el-button-group>
-      </el-form-item>
     </el-form>
   </div>
 </template>
