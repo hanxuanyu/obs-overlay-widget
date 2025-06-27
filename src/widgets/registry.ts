@@ -3,6 +3,7 @@ import ClockWidget from './clock';
 import DateWidget from './date';
 import TextWidget from './text';
 import ImageWidget from './image';
+import TimerWidget from './timer';
 
 
 // 导入类型定义
@@ -14,6 +15,7 @@ export const widgets: WidgetRegistration[] = [
   DateWidget,
   TextWidget,
   ImageWidget,
+  TimerWidget,
 ];
 
 // 获取小组件显示信息列表（用于 UI 展示）
