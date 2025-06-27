@@ -11,11 +11,8 @@
       <div class="progress-fill" :style="progressFillStyle"></div>
     </div>
     <div class="timer-controls" v-if="!props.config.autoStart">
-      <button @click="startTimer" :disabled="status === 'running'" class="control-btn start">
-        {{ status === 'paused' ? '继续' : '开始' }}
-      </button>
-      <button @click="pauseTimer" :disabled="status !== 'running'" class="control-btn pause">
-        暂停
+      <button @click="togglePlayPause" class="control-btn play-pause">
+        {{ getPlayPauseText() }}
       </button>
       <button @click="resetTimer" class="control-btn reset">
         重置
@@ -261,6 +258,33 @@ const toggleTimer = () => {
   }
 };
 
+// 新的切换播放/暂停方法
+const togglePlayPause = () => {
+  if (status.value === 'running') {
+    pauseTimer();
+  } else if (status.value === 'paused' || status.value === 'stopped') {
+    startTimer();
+  } else if (status.value === 'finished') {
+    resetTimer();
+  }
+};
+
+// 获取播放/暂停按钮文本
+const getPlayPauseText = () => {
+  switch (status.value) {
+    case 'running':
+      return '⏸️ 暂停';
+    case 'paused':
+      return '▶️ 继续';
+    case 'stopped':
+      return '▶️ 开始';
+    case 'finished':
+      return '🔄 重置';
+    default:
+      return '▶️ 开始';
+  }
+};
+
 // 监听配置变化
 watch(() => props.config.duration, (newDuration) => {
   if (status.value === 'stopped' && props.config.mode === 'countdown') {
@@ -331,12 +355,13 @@ onUnmounted(() => {
   cursor: not-allowed;
 }
 
-.control-btn.start {
+.control-btn.play-pause {
   background: rgba(76, 175, 80, 0.8);
+  min-width: 80px;
 }
 
-.control-btn.pause {
-  background: rgba(255, 193, 7, 0.8);
+.control-btn.play-pause:hover {
+  background: rgba(76, 175, 80, 0.9);
 }
 
 .control-btn.reset {
