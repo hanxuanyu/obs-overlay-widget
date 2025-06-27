@@ -8,23 +8,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
 import dayjs from 'dayjs';
-
-// Define props interface
-interface ClockConfig {
-  format: string;
-  color: string;
-  fontSize: number;
-  fontWeight: string;
-  fontFamily: string;
-  textShadow: boolean;
-  shadowColor: string;
-  shadowBlur: number;
-  useGradient: boolean;
-  gradientColors: string[];
-  showSeconds: boolean;
-  showDate: boolean;
-  dateFormat: string;
-}
+import type { ClockConfig } from './types';
 
 // Define props with default values
 const props = withDefaults(defineProps<{

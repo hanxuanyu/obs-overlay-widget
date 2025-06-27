@@ -83,12 +83,7 @@ npm run preview
 ```
 src/
 ├── assets/            # 静态资源
-├── components/        # 组件
-│   └── config/        # 小组件配置面板组件
-│       ├── ClockConfig.vue
-│       ├── DateConfig.vue
-│       ├── TextConfig.vue
-│       └── ImageConfig.vue
+├── components/        # 通用组件
 ├── router/            # 路由配置
 ├── utils/             # 工具函数
 │   └── configUtils.ts # 配置编码/解码工具
@@ -96,8 +91,91 @@ src/
 │   ├── HomeView.vue   # 主页
 │   ├── ConfigView.vue # 配置页面
 │   └── PreviewView.vue# 预览页面
-├── widgets/           # 小组件实现
-│   ├── registry.ts    # 小组件注册中心
+├── widgets/           # 小组件模块
+│   ├── clock/         # 时钟小组件模块
+│   │   ├── index.ts   # 模块导出
+│   │   ├── types.ts   # 类型定义
+│   │   ├── Widget.vue # 小组件组件
+│   │   └── Config.vue # 配置组件
+│   ├── date/          # 日期小组件模块
+│   ├── text/          # 文本小组件模块
+│   ├── image/         # 图片小组件模块
+│   └── registry.ts    # 小组件注册中心
+```
+
+## 小组件开发指南
+
+### 创建新小组件
+
+1. **创建小组件文件夹**：在 `src/widgets/` 下创建新的文件夹，如 `newwidget/`
+
+2. **创建必要文件**：
+   - `types.ts` - 定义配置接口和默认配置
+   - `Widget.vue` - 小组件显示组件
+   - `Config.vue` - 小组件配置组件
+   - `index.ts` - 模块导出文件
+
+3. **实现类型定义**（types.ts）：
+   ```typescript
+   // 小组件配置接口
+   export interface NewWidgetConfig {
+     // 配置属性定义
+   }
+   
+   // 默认配置
+   export const defaultConfig: NewWidgetConfig = {
+     // 默认值
+   };
+   ```
+
+4. **实现小组件组件**（Widget.vue）：
+   ```vue
+   <template>
+     <!-- 小组件UI -->
+   </template>
+   
+   <script setup lang="ts">
+   import type { NewWidgetConfig } from './types';
+   // 组件逻辑
+   </script>
+   ```
+
+5. **实现配置组件**（Config.vue）：
+   ```vue
+   <template>
+     <!-- 配置UI -->
+   </template>
+   
+   <script setup lang="ts">
+   import type { NewWidgetConfig } from './types';
+   // 配置逻辑
+   </script>
+   ```
+
+6. **导出模块**（index.ts）：
+   ```typescript
+   import Widget from './Widget.vue';
+   import Config from './Config.vue';
+   import { defaultConfig } from './types';
+   
+   export default {
+     label: '新小组件',
+     value: 'newwidget',
+     component: Widget,
+     configComponent: Config,
+     getDefaultConfig: () => defaultConfig
+   };
+   ```
+
+7. **注册小组件**：在 `registry.ts` 中导入并添加到 `widgets` 数组
+
+### 架构优势
+
+- **模块化设计**：每个小组件独立成模块，包含所有相关代码
+- **类型安全**：TypeScript 提供完整的类型检查和智能提示
+- **可扩展性**：添加新小组件无需修改核心逻辑，只需创建新模块并注册
+- **代码组织**：相关代码集中在同一文件夹，便于维护和理解
+- **零侵入**：新增小组件不会影响现有小组件和核心功能
 │   ├── ClockWidget.vue
 │   ├── DateWidget.vue
 │   ├── TextWidget.vue

@@ -6,20 +6,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-
-// Define props interface
-interface TextConfig {
-  text: string;
-  color: string;
-  fontSize: number;
-  fontWeight: string;
-  fontFamily: string;
-  textShadow: boolean;
-  shadowColor: string;
-  shadowBlur: number;
-  useGradient: boolean;
-  gradientColors: string[];
-}
+import type { TextConfig } from './types';
 
 // Define props with default values
 const props = withDefaults(defineProps<{

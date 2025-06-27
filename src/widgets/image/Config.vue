@@ -59,18 +59,7 @@
 
 <script setup lang="ts">
 import { ref, watch, onMounted } from 'vue';
-
-// Define props interface for config
-interface ImageConfig {
-  imageUrl: string;
-  width: number;
-  height: number;
-  opacity: number;
-  borderRadius: number;
-  shadow: boolean;
-  shadowColor: string;
-  shadowBlur: number;
-}
+import type { ImageConfig } from './types';
 
 // Define props with default values
 const props = withDefaults(defineProps<{

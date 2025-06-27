@@ -1,32 +1,10 @@
 <template>
-  <div class="clock-config">
-    <h2>时钟小组件设置</h2>
+  <div class="date-config">
+    <h2>日期小组件设置</h2>
     
     <el-form label-position="top">
-      <el-form-item label="时间格式">
+      <el-form-item label="日期格式">
         <el-select v-model="localConfig.format" placeholder="选择格式">
-          <el-option label="HH:mm:ss (24小时制)" value="HH:mm:ss" />
-          <el-option label="HH:mm (24小时制)" value="HH:mm" />
-          <el-option label="hh:mm:ss A (12小时制)" value="hh:mm:ss A" />
-          <el-option label="hh:mm A (12小时制)" value="hh:mm A" />
-        </el-select>
-      </el-form-item>
-      
-      <el-form-item>
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <div>
-            <span>显示秒</span>
-            <el-switch v-model="localConfig.showSeconds" style="margin-left: 10px;" />
-          </div>
-          <div>
-            <span>显示日期</span>
-            <el-switch v-model="localConfig.showDate" style="margin-left: 10px;" />
-          </div>
-        </div>
-      </el-form-item>
-      
-      <el-form-item v-if="localConfig.showDate" label="日期格式">
-        <el-select v-model="localConfig.dateFormat" placeholder="选择格式">
           <el-option label="YYYY-MM-DD" value="YYYY-MM-DD" />
           <el-option label="MM/DD/YYYY" value="MM/DD/YYYY" />
           <el-option label="DD/MM/YYYY" value="DD/MM/YYYY" />
@@ -35,10 +13,14 @@
         </el-select>
       </el-form-item>
       
+      <el-form-item label="显示星期">
+        <el-switch v-model="localConfig.showWeekday" />
+      </el-form-item>
+      
       <el-divider>文本样式</el-divider>
       
       <el-form-item label="字体大小">
-        <el-slider v-model="localConfig.fontSize" :min="12" :max="120" show-input />
+        <el-slider v-model="localConfig.fontSize" :min="12" :max="80" show-input />
       </el-form-item>
       
       <el-form-item label="字体">
@@ -102,8 +84,8 @@
       <el-form-item>
         <el-button-group>
           <el-button type="primary" @click="applyPreset('modern')">现代风格</el-button>
-          <el-button type="success" @click="applyPreset('neon')">霓虹风格</el-button>
-          <el-button type="warning" @click="applyPreset('elegant')">优雅风格</el-button>
+          <el-button type="success" @click="applyPreset('elegant')">优雅风格</el-button>
+          <el-button type="warning" @click="applyPreset('casual')">休闲风格</el-button>
           <el-button type="danger" @click="applyPreset('minimal')">简约风格</el-button>
         </el-button-group>
       </el-form-item>
@@ -113,32 +95,16 @@
 
 <script setup lang="ts">
 import { ref, watch, onMounted } from 'vue';
-
-// 为配置定义 props 接口
-interface ClockConfig {
-  format: string;
-  color: string;
-  fontSize: number;
-  fontWeight: string;
-  fontFamily: string;
-  textShadow: boolean;
-  shadowColor: string;
-  shadowBlur: number;
-  useGradient: boolean;
-  gradientColors: string[];
-  showSeconds: boolean;
-  showDate: boolean;
-  dateFormat: string;
-}
+import type { DateConfig } from './types';
 
 // Define props with default values
 const props = withDefaults(defineProps<{
-  config: Partial<ClockConfig>;
+  config: Partial<DateConfig>;
 }>(), {
   config: () => ({
-    format: 'HH:mm:ss',
+    format: 'YYYY-MM-DD',
     color: '#ffffff',
-    fontSize: 48,
+    fontSize: 32,
     fontWeight: 'normal',
     fontFamily: 'Arial',
     textShadow: false,
@@ -146,22 +112,20 @@ const props = withDefaults(defineProps<{
     shadowBlur: 4,
     useGradient: false,
     gradientColors: ['#ff0000', '#0000ff'],
-    showSeconds: true,
-    showDate: false,
-    dateFormat: 'YYYY-MM-DD'
+    showWeekday: true
   })
 });
 
 // Define emit
 const emit = defineEmits<{
-  (event: 'update:config', config: ClockConfig): void;
+  (event: 'update:config', config: DateConfig): void;
 }>();
 
 // Local config for two-way binding
-const localConfig = ref<ClockConfig>({
-  format: 'HH:mm:ss',
+const localConfig = ref<DateConfig>({
+  format: 'YYYY-MM-DD',
   color: '#ffffff',
-  fontSize: 48,
+  fontSize: 32,
   fontWeight: 'normal',
   fontFamily: 'Arial',
   textShadow: false,
@@ -169,9 +133,7 @@ const localConfig = ref<ClockConfig>({
   shadowBlur: 4,
   useGradient: false,
   gradientColors: ['#ff0000', '#0000ff'],
-  showSeconds: true,
-  showDate: false,
-  dateFormat: 'YYYY-MM-DD'
+  showWeekday: true
 });
 
 // Sync with parent config on mount
@@ -183,8 +145,8 @@ onMounted(() => {
 // Preset styles
 const presets = {
   modern: {
-    format: 'HH:mm:ss',
-    fontSize: 72,
+    format: 'YYYY-MM-DD',
+    fontSize: 42,
     fontFamily: 'Arial',
     fontWeight: 'bold',
     useGradient: true,
@@ -192,26 +154,11 @@ const presets = {
     textShadow: true,
     shadowColor: 'rgba(0, 0, 0, 0.3)',
     shadowBlur: 10,
-    showSeconds: true,
-    showDate: true,
-    dateFormat: 'YYYY-MM-DD'
-  },
-  neon: {
-    format: 'HH:mm:ss',
-    fontSize: 60,
-    fontFamily: 'Impact',
-    fontWeight: 'normal',
-    color: '#39ff14',
-    useGradient: true,
-    textShadow: true,
-    shadowColor: 'rgba(57, 255, 20, 0.8)',
-    shadowBlur: 15,
-    showSeconds: true,
-    showDate: false
+    showWeekday: true
   },
   elegant: {
-    format: 'hh:mm A',
-    fontSize: 64,
+    format: 'MMMM D, YYYY',
+    fontSize: 36,
     fontFamily: 'Georgia',
     fontWeight: 'normal',
     useGradient: true,
@@ -219,20 +166,29 @@ const presets = {
     textShadow: true,
     shadowColor: 'rgba(0, 0, 0, 0.5)',
     shadowBlur: 5,
-    showSeconds: true,
-    showDate: true,
-    dateFormat: 'MMMM D, YYYY'
+    showWeekday: true
+  },
+  casual: {
+    format: 'D MMMM YYYY',
+    fontSize: 32,
+    fontFamily: 'Verdana',
+    fontWeight: 'normal',
+    color: '#2ecc71',
+    useGradient: false,
+    textShadow: true,
+    shadowColor: 'rgba(46, 204, 113, 0.5)',
+    shadowBlur: 8,
+    showWeekday: true
   },
   minimal: {
-    format: 'HH:mm',
-    fontSize: 56,
+    format: 'MM/DD/YYYY',
+    fontSize: 28,
     fontFamily: 'Helvetica',
     fontWeight: 'lighter',
     color: '#ffffff',
     useGradient: false,
     textShadow: false,
-    showSeconds: false,
-    showDate: false
+    showWeekday: false
   }
 };
 
@@ -249,7 +205,7 @@ watch(localConfig, (newConfig) => {
 </script>
 
 <style scoped>
-.clock-config {
+.date-config {
   padding: 10px;
 }
 </style>

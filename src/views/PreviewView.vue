@@ -11,25 +11,18 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue';
 import { decodeConfig } from '../utils/configUtils';
+import { widgets } from '../widgets/registry';
 
-// 导入小组件组件
-import ClockWidget from '../widgets/ClockWidget.vue';
-import DateWidget from '../widgets/DateWidget.vue';
-import TextWidget from '../widgets/TextWidget.vue';
-import ImageWidget from '../widgets/ImageWidget.vue';
-
-// 小组件注册表
-const widgetRegistry = {
-  'clock': ClockWidget,
-  'date': DateWidget,
-  'text': TextWidget,
-  'image': ImageWidget
-};
+// 创建小组件注册表
+const widgetRegistry: Record<string, any> = {};
+widgets.forEach(widget => {
+  widgetRegistry[widget.value] = widget.component;
+});
 
 const widgetType = ref('');
 const widgetConfig = ref({});
 const widgetComponent = computed(() => {
-  return widgetRegistry[widgetType.value as keyof typeof widgetRegistry];
+  return widgetRegistry[widgetType.value];
 });
 
 onMounted(() => {
