@@ -368,6 +368,10 @@ onUnmounted(() => {
   background: rgba(244, 67, 54, 0.8);
 }
 
+.control-btn.reset:hover {
+  background: rgba(244, 67, 54, 0.9);
+}
+
 .progress-bar {
   border-radius: 2px;
   overflow: hidden;
