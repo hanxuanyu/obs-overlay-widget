@@ -149,6 +149,14 @@ watch([selectedWidget, currentWidgetConfig], () => {
   padding-bottom: 30px;
 }
 
+/* 深色模式下的左侧面板 */
+@media (prefers-color-scheme: dark) {
+  .left-panel {
+    background-color: #1e1e1e;
+    color: rgba(255, 255, 255, 0.87);
+  }
+}
+
 .config-container {
   display: flex;
   flex-direction: column;
@@ -158,16 +166,26 @@ watch([selectedWidget, currentWidgetConfig], () => {
 .right-panel {
   flex: 1;
   background-color: transparent;
-  background-image: linear-gradient(45deg, #ddd 25%, transparent 25%), 
-                    linear-gradient(-45deg, #ddd 25%, transparent 25%), 
-                    linear-gradient(45deg, transparent 75%, #ddd 75%), 
-                    linear-gradient(-45deg, transparent 75%, #ddd 75%);
+  background-image: linear-gradient(45deg, rgba(221, 221, 221, 0.6) 25%, transparent 25%), 
+                    linear-gradient(-45deg, rgba(221, 221, 221, 0.6) 25%, transparent 25%), 
+                    linear-gradient(45deg, transparent 75%, rgba(221, 221, 221, 0.6) 75%), 
+                    linear-gradient(-45deg, transparent 75%, rgba(221, 221, 221, 0.6) 75%);
   background-size: 20px 20px;
   background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
+}
+
+/* 深色模式下的透明背景 */
+@media (prefers-color-scheme: dark) {
+  .right-panel {
+    background-image: linear-gradient(45deg, rgba(102, 102, 102, 0.4) 25%, transparent 25%), 
+                      linear-gradient(-45deg, rgba(102, 102, 102, 0.4) 25%, transparent 25%), 
+                      linear-gradient(45deg, transparent 75%, rgba(102, 102, 102, 0.4) 75%), 
+                      linear-gradient(-45deg, transparent 75%, rgba(102, 102, 102, 0.4) 75%);
+  }
 }
 
 .widget-selector {
@@ -192,6 +210,17 @@ watch([selectedWidget, currentWidgetConfig], () => {
   margin-bottom: 10px;
   font-size: 16px;
   color: #606266;
+}
+
+/* 深色模式下的URL生成器样式 */
+@media (prefers-color-scheme: dark) {
+  .url-generator {
+    border-bottom: 1px solid #444444;
+  }
+  
+  .url-generator h3 {
+    color: #cccccc;
+  }
 }
 
 .url-input-group {

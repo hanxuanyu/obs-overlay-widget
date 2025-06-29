@@ -108,3 +108,26 @@ button:focus-visible {
     background-color: #f8f9fa;
   }
 }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color: rgba(255, 255, 255, 0.87);
+    background-color: transparent;
+  }
+  
+  /* 确保预览模式下在深色主题也是透明的 */
+  body.preview-mode,
+  html.preview-mode,
+  body.preview-mode #app {
+    background-color: transparent !important;
+    background: transparent !important;
+  }
+  
+  a:hover {
+    color: #8cc8ff;
+  }
+  button {
+    background-color: #2a2a2a;
+    color: rgba(255, 255, 255, 0.87);
+  }
+}
