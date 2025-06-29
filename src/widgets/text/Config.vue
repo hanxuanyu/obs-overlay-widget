@@ -17,7 +17,7 @@
       <el-divider>基本设置</el-divider>
 
       <el-form-item label="文本内容">
-        <el-input v-model="localConfig.text" type="textarea" :rows="3" placeholder="输入要显示的文本" />
+        <el-input v-model="localConfig.text" type="textarea" :rows="3" placeholder="输入要显示的文本（支持换行）" />
       </el-form-item>
       
       <el-divider>文本样式</el-divider>
@@ -43,6 +43,24 @@
           <el-option label="普通" value="normal" />
           <el-option label="粗体" value="bold" />
           <el-option label="细体" value="lighter" />
+        </el-select>
+      </el-form-item>
+
+      <el-divider>布局设置</el-divider>
+      
+      <el-form-item label="文本对齐">
+        <el-select v-model="localConfig.textAlign">
+          <el-option label="左对齐" value="left" />
+          <el-option label="居中对齐" value="center" />
+          <el-option label="右对齐" value="right" />
+          <el-option label="两端对齐" value="justify" />
+        </el-select>
+      </el-form-item>
+      
+      <el-form-item label="文字方向">
+        <el-select v-model="localConfig.writingMode">
+          <el-option label="水平显示" value="horizontal" />
+          <el-option label="垂直显示" value="vertical" />
         </el-select>
       </el-form-item>
       
@@ -97,7 +115,7 @@ const props = withDefaults(defineProps<{
   config: Partial<TextConfig>;
 }>(), {
   config: () => ({
-    text: 'Sample Text',
+    text: '示例文本\n支持换行显示',
     color: '#ffffff',
     fontSize: 32,
     fontWeight: 'normal',
@@ -106,7 +124,9 @@ const props = withDefaults(defineProps<{
     shadowColor: 'rgba(0,0,0,0.5)',
     shadowBlur: 4,
     useGradient: false,
-    gradientColors: ['#ff0000', '#0000ff']
+    gradientColors: ['#ff0000', '#0000ff'],
+    textAlign: 'left',
+    writingMode: 'horizontal'
   })
 });
 
@@ -117,7 +137,7 @@ const emit = defineEmits<{
 
 // Local config for two-way binding
 const localConfig = ref<TextConfig>({
-  text: 'Sample Text',
+  text: '示例文本\n支持换行显示',
   color: '#ffffff',
   fontSize: 32,
   fontWeight: 'normal',
@@ -126,7 +146,9 @@ const localConfig = ref<TextConfig>({
   shadowColor: 'rgba(0,0,0,0.5)',
   shadowBlur: 4,
   useGradient: false,
-  gradientColors: ['#ff0000', '#0000ff']
+  gradientColors: ['#ff0000', '#0000ff'],
+  textAlign: 'left',
+  writingMode: 'horizontal'
 });
 
 // Sync with parent config on mount
@@ -146,7 +168,9 @@ const presets = {
     gradientColors: ['#3498db', '#9b59b6'],
     textShadow: true,
     shadowColor: 'rgba(0, 0, 0, 0.3)',
-    shadowBlur: 10
+    shadowBlur: 10,
+    textAlign: 'center' as const,
+    writingMode: 'horizontal' as const
   },
   neon: {
     text: localConfig.value.text,
@@ -157,7 +181,9 @@ const presets = {
     useGradient: false,
     textShadow: true,
     shadowColor: 'rgba(57, 255, 20, 0.8)',
-    shadowBlur: 15
+    shadowBlur: 15,
+    textAlign: 'center' as const,
+    writingMode: 'horizontal' as const
   },
   retro: {
     text: localConfig.value.text,
@@ -168,7 +194,9 @@ const presets = {
     gradientColors: ['#f39c12', '#e74c3c'],
     textShadow: true,
     shadowColor: 'rgba(0, 0, 0, 0.6)',
-    shadowBlur: 6
+    shadowBlur: 6,
+    textAlign: 'left' as const,
+    writingMode: 'horizontal' as const
   },
   minimal: {
     text: localConfig.value.text,
@@ -177,7 +205,9 @@ const presets = {
     fontWeight: 'lighter',
     color: '#ffffff',
     useGradient: false,
-    textShadow: false
+    textShadow: false,
+    textAlign: 'left' as const,
+    writingMode: 'horizontal' as const
   }
 };
 
