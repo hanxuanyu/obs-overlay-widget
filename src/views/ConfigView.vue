@@ -1,6 +1,12 @@
 <template>
   <div class="config-view">
     <div class="left-panel">
+      <div class="header-section">
+        <el-button @click="goHome" type="text" class="back-button" size="large">
+          <el-icon><ArrowLeft /></el-icon> 返回首页
+        </el-button>
+      </div>
+      
       <div class="widget-selector">
         <el-select v-model="selectedWidget" placeholder="选择小组件" @change="handleWidgetChange">
           <el-option v-for="widget in widgets" :key="widget.value" :label="widget.label" :value="widget.value" />
@@ -41,7 +47,8 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from 'vue';
-import { CopyDocument, View } from '@element-plus/icons-vue';
+import { useRouter } from 'vue-router';
+import { CopyDocument, View, ArrowLeft } from '@element-plus/icons-vue';
 import { ElMessage } from 'element-plus';
 import { encodeConfig, decodeConfig } from '../utils/configUtils';
 import { generatePreviewUrl } from '../utils/urlUtils';
@@ -49,6 +56,7 @@ import { generatePreviewUrl } from '../utils/urlUtils';
 // 导入小组件注册表
 import { widgets, getDefaultConfig } from '../widgets/registry';
 
+const router = useRouter();
 const selectedWidget = ref('clock');
 const currentWidgetConfig = ref({});
 const generatedUrl = ref('');
@@ -103,6 +111,11 @@ const openPreview = () => {
   } else {
     ElMessage.warning('请先配置小组件');
   }
+};
+
+// 返回首页
+const goHome = () => {
+  router.push('/');
 };
 
 // 加载时检查查询参数（用于直接链接）
@@ -190,6 +203,32 @@ watch([selectedWidget, currentWidgetConfig], () => {
 
 .widget-selector {
   width: 100%;
+}
+
+.header-section {
+  margin-bottom: 15px;
+}
+
+.back-button {
+  padding: 8px 0;
+  color: #606266;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.back-button:hover {
+  color: #409eff;
+}
+
+/* 深色模式下的返回按钮样式 */
+@media (prefers-color-scheme: dark) {
+  .back-button {
+    color: #cccccc;
+  }
+  
+  .back-button:hover {
+    color: #409eff;
+  }
 }
 
 .config-panel {
